@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <title>Cadastro</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="d-flex align-items-center gap-3">
+            <img src="https://cdn-icons-png.flaticon.com/512/7626/7626835.png" width="40" height="40" class="d-inline-block align-top ms-2 me-2" alt="SisIcone">
+            <a class="navbar-brand" href="#">Sales System</a>
+        </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#conteudoNavbarSuportado">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item"><a class="nav-link active" href="/administrativo">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+            </ul>
+            <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Pesquisar">
+                <button class="btn btn-outline-light" type="submit">Pesquisar</button>
+            </form>
+        </div>
+    </nav>
+
+    <div class="container mt-3">
+        <form action="/salvarCidade" th:object="${cidade}" method="POST">
+            
+            <!-- ID -->
+            <div class="mb-3">
+                <label for="id" class="form-label">ID:</label>
+                <input type="text" readonly class="form-control" id="id" th:field="*{id}">
+            </div>
+
+            <!-- Nome -->
+            <div class="mb-3">
+                <label for="nome" class="form-label">Nome da Cidade:</label>
+                <input type="text" class="form-control" id="nome" th:field="*{nome}">
+            </div>
+
+            <!-- CEP -->
+            <div class="mb-3">
+                <label for="cep" class="form-label">CEP:</label>
+                <input type="text" class="form-control" id="cep" th:field="*{cep}">
+            </div>
+
+            <!-- Estado -->
+            <div class="mb-3">
+                <label class="form-label">Estado:</label>
+                <select th:field="*{estado}" class="form-control">
+                    <option th:each="est:${listaEstado}" th:value="${est.id}" th:text="${est.nome}"></option>
+                </select>
+            </div>
+
+            <!-- BOTÕES -->
+            <div class="mb-3">
+                <button type="submit" class="btn btn-success">
+                    <i class="fa-solid fa-floppy-disk"></i> Salvar
+                </button>
+                <a class="btn btn-dark" href="/listarCidade">
+                    <i class="fa-solid fa-list-check"></i> Listar
+                </a>
+                <a class="btn btn-danger" href="/administrativo">
+                    <i class="fa-solid fa-angle-left"></i> Voltar
+                </a>
+            </div>
+
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

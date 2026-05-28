@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.8/css/dataTables.dataTables.css" />
+    <title>Tabela</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="border-bottom: 3px solid white;">
+        <div class="d-flex align-items-center gap-3">
+            <img src="https://cdn-icons-png.flaticon.com/512/7626/7626835.png" width="40" height="40" class="d-inline-block align-top ms-2 me-2" alt="SisIcone">
+            <a class="navbar-brand" href="#">Sales System</a>
+        </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#conteudoNavbarSuportado">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item"><a class="nav-link active" href="/administrativo">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+            </ul>
+            <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Pesquisar">
+                <button class="btn btn-outline-light" type="submit">Pesquisar</button>
+            </form>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <table class="table table-striped table-hover" id="tabela">
+            <thead class="table-dark">
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Sigla</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="estado: ${listaEstado}">
+                    <td th:text="${estado.id}"></td>
+                    <td th:text="${estado.nome}"></td>
+                    <td th:text="${estado.sigla}"></td>
+                    <td>
+                        <a th:href="@{/editarEstado/{id}(id=${estado.id})}" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
+                        <a th:href="@{/removerEstado/{id}(id=${estado.id})}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        									<!-- botões -->
+        <div class="text-end mt-3">
+            <a class="btn btn-primary" href="/cadastroEstado"><i class="fa-solid fa-plus"></i> Cadastrar</a>
+            <a class="btn btn-danger" href="/administrativo"><i class="fa-solid fa-angle-left"></i> Voltar</a>
+            
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ60W/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js" integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdn.datatables.net/2.3.8/js/dataTables.js"></script>
+	 <script>
+    $(document).ready(function () {
+        $('#tabela').DataTable({
+            language: {
+                url: '//cdn.datatables.net/plug-ins/2.3.8/i18n/pt-BR.json',
+            },
+        });
+    });
+    </script>
+
+</body>
+</html>
