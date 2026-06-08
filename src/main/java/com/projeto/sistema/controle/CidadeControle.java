@@ -21,7 +21,7 @@ public class CidadeControle {
 	@Autowired
 	private EstadoRepositorio estadoRepositorio;
 	
-	@GetMapping("cadastroCidade")
+	@GetMapping("/cadastroCidade")
 	public ModelAndView cadastrar(Cidade cidade){
 		ModelAndView mv = new ModelAndView("administrativo/cidade/cadastro");
 		mv.addObject("cidade", cidade);

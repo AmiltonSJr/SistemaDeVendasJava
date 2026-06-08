@@ -18,7 +18,7 @@ public class EstadoControle {
 	@Autowired
 	private EstadoRepositorio estadoRepositorio;
 	
-	@GetMapping("cadastroEstado")
+	@GetMapping("/cadastroEstado")
 	public ModelAndView cadastrar(Estado estado){
 		ModelAndView mv = new ModelAndView("administrativo/estado/cadastro");
 		mv.addObject("estado", estado);

@@ -41,14 +41,19 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <div class="container">
 <form action="/salvarEstado" th:object="${estado}" method="POST">
   <div class="form-group" style="padding: 5px; margin-top: 10px;">
+    						<!-- ID -->
      <label for="id">ID:</label>
     	<input type="text" readonly="true" class="form-control" id="id" th:field="*{id}">
+     						<!-- Estado -->
      <label for="nome">Nome do Estado:</label>
-    	<input type="text" class="form-control" id="nome" th:field="*{nome}">
+    	<input type="text" required class="form-control" id="nome" th:field="*{nome}">
+     						
+     						<!-- UF -->
      <label for="sigla">Sigla (UF): </label>
-    	<input type="text" class="form-control" id="sigla" th:field="*{sigla}">
+    	<input type="text" required class="form-control" id="sigla" th:field="*{sigla}">
   </div>
-  <!-- botões -->
+  								
+  								<!-- botões -->
   <button type="submit" class="btn btn-success"><i class="fa-solid fa-floppy-disk"></i> Salvar</button>
   <a class="btn btn-dark" href="/listarEstado"><i class="fa-solid fa-list-check"></i> Listar</a>
   <a class="btn btn-danger" href="/administrativo"><i class="fa-solid fa-angle-left"></i> Voltar</a>
