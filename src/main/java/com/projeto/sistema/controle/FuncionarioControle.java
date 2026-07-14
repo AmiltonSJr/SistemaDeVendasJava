@@ -30,7 +30,7 @@ public class FuncionarioControle {
 	}
 	@GetMapping("/listarFuncionario")
 	public ModelAndView listar() {
-		ModelAndView mv = new ModelAndView("administrativo/funcionario/lista");
+		ModelAndView mv = new ModelAndView("administrativo/funcionarios/lista");
 		mv.addObject("listaFuncionario", funcionarioRepositorio.findAll());
 		return mv;
 	}

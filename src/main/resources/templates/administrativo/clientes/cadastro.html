@@ -32,7 +32,7 @@
 										<!-- Labels -->
 										
     <div class="container mt-3">
-    <form action="/salvarFuncionario" th:object="${funcionario}" method="POST">
+    <form action="/salvarCliente" th:object="${cliente}" method="POST">
 
         						<!-- Linha 1: ID e Nome -->
         <div class="row g-3">
@@ -93,21 +93,13 @@
             </div>
         </div>
 
-        <!-- Linha 6: Função -->
-        <div class="row g-3 mt-1">
-            <div class="col-md-6">
-                <label for="funcao" class="form-label">Função:</label>
-                <input type="text" required class="form-control" id="funcao" th:field="*{funcao}">
-            </div>
-        </div>
-
         <!-- Botão de salvar -->
         <div class="row mt-4">
             <div class="col">
                 <button type="submit" class="btn btn-success">
                     <i class="fa-solid fa-floppy-disk"></i> Salvar
                 </button>
-                <a class="btn btn-dark" href="/listarFuncionario">
+                <a class="btn btn-dark" href="/listarCliente">
                     <i class="fa-solid fa-list-check"></i> Listar
                 </a>
                 <a class="btn btn-danger" href="/administrativo">

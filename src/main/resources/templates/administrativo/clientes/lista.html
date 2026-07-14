@@ -42,33 +42,30 @@
                     <th>Cidade</th>
                     <th>Telefone</th>
                     <th>Email</th>
-                    <th>Função</th>
                     <th>Ação</th>
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="funcionario: ${listaFuncionario}">
-                    <td th:text="${funcionario.id}"></td>
-                    <td th:text="${funcionario.nome}"></td>
-                    <td th:text="${funcionario.cpf}"></td>
-                    <td th:text="${funcionario.endereco}"></td>
-                    <td th:text="${funcionario.numero}"></td>
-                    <td th:text="${funcionario.bairro}"></td>
-                    <td th:text="${funcionario.cidade.nome}"></td>
-                    <td th:text="${funcionario.telefone}"></td>
-                    <td th:text="${funcionario.email}"></td>
-                    <td th:text="${funcionario.funcao}"></td>
-                    
+                <tr th:each="cliente: ${listaCliente}">
+                    <td th:text="${cliente.id}"></td>
+                    <td th:text="${cliente.nome}"></td>
+                    <td th:text="${cliente.cpf}"></td>
+                    <td th:text="${cliente.endereco}"></td>
+                    <td th:text="${cliente.numero}"></td>
+                    <td th:text="${cliente.bairro}"></td>
+                    <td th:text="${cliente.cidade.nome}"></td>
+                    <td th:text="${cliente.telefone}"></td>
+                    <td th:text="${cliente.email}"></td>
                     <td>
-                        <a th:href="@{/editarFuncionario/{id}(id=${funcionario.id})}" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
-                        <a th:href="@{/removerFuncionario/{id}(id=${funcionario.id})}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+                        <a th:href="@{/editarCliente/{id}(id=${cliente.id})}" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
+                        <a th:href="@{/removerCliente/{id}(id=${cliente.id})}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
             </tbody>
         </table>
         									<!-- botões -->
         <div class="text-end mt-3">
-            <a class="btn btn-primary" href="/cadastroFuncionario"><i class="fa-solid fa-plus"></i> Cadastrar</a>
+            <a class="btn btn-primary" href="/cadastroCliente"><i class="fa-solid fa-plus"></i> Cadastrar</a>
             <a class="btn btn-danger" href="/administrativo"><i class="fa-solid fa-angle-left"></i> Voltar</a>
             
         </div>

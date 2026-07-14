@@ -30,45 +30,42 @@
     </nav>
 
     <div class="container-fluid">
-        <table class="table table-striped table-bordered table-hover" id="tabela"  >
+        <table class="table table-striped table-hover" id="tabela">
             <thead class="table-dark">
                 <tr>
                     <th>Id</th>
                     <th>Nome</th>
-                    <th>CPF</th>
-                    <th>Endereço</th>
-                    <th>Numero</th>
-                    <th>Bairro</th>
-                    <th>Cidade</th>
-                    <th>Telefone</th>
-                    <th>Email</th>
-                    <th>Função</th>
-                    <th>Ação</th>
+                    <th>Codigo de Barras</th>
+                    <th>Unid. Medida</th>
+                    <th>Estoque</th>
+                    <th>Preço Custo</th>
+                    <th>Preço Venda</th>
+                    <th>Lucro</th>
+                    <th>Margém de Lucro</th>
+                    <th>Opções</th>
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="funcionario: ${listaFuncionario}">
-                    <td th:text="${funcionario.id}"></td>
-                    <td th:text="${funcionario.nome}"></td>
-                    <td th:text="${funcionario.cpf}"></td>
-                    <td th:text="${funcionario.endereco}"></td>
-                    <td th:text="${funcionario.numero}"></td>
-                    <td th:text="${funcionario.bairro}"></td>
-                    <td th:text="${funcionario.cidade.nome}"></td>
-                    <td th:text="${funcionario.telefone}"></td>
-                    <td th:text="${funcionario.email}"></td>
-                    <td th:text="${funcionario.funcao}"></td>
-                    
+                <tr th:each="produto: ${listaProduto}">
+                    <td th:text="${produto.id}"></td>
+                    <td th:text="${produto.nome}"></td>
+                    <td th:text="${produto.codigoBarras}"></td>
+                    <td th:text="${produto.unidadeMedida}"></td>
+                    <td th:text="${produto.estoque}"></td>
+                    <td th:text="${produto.precoCusto}"></td>
+                    <td th:text="${produto.precoVenda}"></td>
+                    <td th:text="${produto.lucro}"></td>
+                    <td th:text="${produto.margemLucro}"></td>
                     <td>
-                        <a th:href="@{/editarFuncionario/{id}(id=${funcionario.id})}" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
-                        <a th:href="@{/removerFuncionario/{id}(id=${funcionario.id})}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+                        <a th:href="@{/editarProduto/{id}(id=${produto.id})}" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
+                        <a th:href="@{/removerProduto/{id}(id=${produto.id})}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
             </tbody>
         </table>
         									<!-- botões -->
         <div class="text-end mt-3">
-            <a class="btn btn-primary" href="/cadastroFuncionario"><i class="fa-solid fa-plus"></i> Cadastrar</a>
+            <a class="btn btn-primary" href="/cadastroProduto"><i class="fa-solid fa-plus"></i> Cadastrar</a>
             <a class="btn btn-danger" href="/administrativo"><i class="fa-solid fa-angle-left"></i> Voltar</a>
             
         </div>
