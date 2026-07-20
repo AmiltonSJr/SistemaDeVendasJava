@@ -18,8 +18,11 @@ public class ItemEntrada implements Serializable {
 	private Long id;
 	private Double quantidade;
 	private Double valor;
+	private Double valorCusto;
 	@ManyToOne
 	private Entrada entrada;
+	@ManyToOne
+	private Produto produto;
 	public Long getId() {
 		return id;
 	}
@@ -53,10 +56,12 @@ public class ItemEntrada implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	@ManyToOne
-	private Produto produto;
+	public Double getValorCusto() {
+		return valorCusto;
+	}
+	public void setValorCusto(Double valorCusto) {
+		this.valorCusto = valorCusto;
+	}
 	
 	
-	
-
 }

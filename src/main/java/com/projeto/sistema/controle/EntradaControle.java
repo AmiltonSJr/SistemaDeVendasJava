@@ -36,10 +36,16 @@ public class EntradaControle {
 	private List<ItemEntrada> listaItemEntrada = new ArrayList<ItemEntrada>();
 	
 	@GetMapping("/cadastroEntrada")
-	public ModelAndView cadastrar(Entrada entrada){
+	public ModelAndView cadastrar(Entrada entrada, ItemEntrada itemEntrada){
 		ModelAndView mv = new ModelAndView("administrativo/entrada/cadastro");
 		mv.addObject("entrada", entrada);
-		mv.addObject("listaItemEntrada", itemEntradaRepositorio.findAll());
+		mv.addObject("itemEntrada",itemEntrada);
+		mv.addObject("listaItemEntrada", this.listaItemEntrada);
+		mv.addObject("listaFuncionarios", funcionarioRepositorio.findAll());
+		mv.addObject("listaFornecedores", fornecedorRepositorio.findAll());
+		mv.addObject("listaProdutos", produtoRepositorio.findAll());
+		
+		
 		return mv;
 	}
 	@GetMapping("/listarEntrada")
@@ -49,24 +55,32 @@ public class EntradaControle {
 		return mv;
 	}
 	
-	@GetMapping("/editarEntrada/{id}")
-	public ModelAndView editar(@PathVariable("id")Long id) {
-		Optional<Entrada> entrada = entradaRepositorio.findById(id);
-		return cadastrar(entrada.get());
-	}	
+//	@GetMapping("/editarEntrada/{id}")
+//	public ModelAndView editar(@PathVariable("id")Long id) {
+//		Optional<Entrada> entrada = entradaRepositorio.findById(id);
+//		return cadastrar(entrada.get());
+//	}	
 	
-	@GetMapping("/removerEntrada/{id}")
-	public ModelAndView remover(@PathVariable("id")Long id) {
-		Optional<Entrada> entrada = entradaRepositorio.findById(id);
-		entradaRepositorio.delete(entrada.get());
-		return listar();
-	}	
+//	@GetMapping("/removerEntrada/{id}")
+//	public ModelAndView remover(@PathVariable("id")Long id) {
+//		Optional<Entrada> entrada = entradaRepositorio.findById(id);
+//		entradaRepositorio.delete(entrada.get());
+//		return listar();
+//	}	
 	@PostMapping("/salvarEntrada")
-	public ModelAndView salvar(Entrada entrada , BindingResult result) {
+	public ModelAndView salvar(Entrada entrada ,ItemEntrada itemEntrada, BindingResult result) {
 		if(result.hasErrors()) {
-			return cadastrar(entrada);
+			return cadastrar(entrada,itemEntrada);
 		}
 		entradaRepositorio.saveAndFlush(entrada);
-		return cadastrar(new Entrada());
+		return cadastrar(new Entrada(), new ItemEntrada());
 	}
+	
+	public List<ItemEntrada> getListaItemEntrada() {
+		return listaItemEntrada;
+	}
+	public void setListaItemEntrada(List<ItemEntrada> listaItemEntrada) {
+		this.listaItemEntrada = listaItemEntrada;
+	}
+	
 }
