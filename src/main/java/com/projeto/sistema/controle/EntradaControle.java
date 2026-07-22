@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.projeto.sistema.modelos.ItemEntrada;
+import com.projeto.sistema.modelos.Produto;
 import com.projeto.sistema.modelos.Entrada;
 import com.projeto.sistema.repositorios.EntradaRepositorio;
 import com.projeto.sistema.repositorios.FornecedorRepositorio;
@@ -68,12 +69,37 @@ public class EntradaControle {
 //		return listar();
 //	}	
 	@PostMapping("/salvarEntrada")
-	public ModelAndView salvar(Entrada entrada ,ItemEntrada itemEntrada, BindingResult result) {
+	public ModelAndView salvar(String acao,Entrada entrada ,ItemEntrada itemEntrada, BindingResult result) {
 		if(result.hasErrors()) {
 			return cadastrar(entrada,itemEntrada);
 		}
-		entradaRepositorio.saveAndFlush(entrada);
-		return cadastrar(new Entrada(), new ItemEntrada());
+		if(acao.equals("itens")) {
+		
+			this.listaItemEntrada.add(itemEntrada);
+			entrada.setValorTotal(entrada.getValorTotal()+ itemEntrada.getValor() * itemEntrada.getQuantidade());
+			entrada.setQuantidadeTotal(entrada.getQuantidadeTotal()+itemEntrada.getQuantidade());
+			
+		}else if(acao.equals("salvar")) {
+			entradaRepositorio.saveAndFlush(entrada);
+			
+			for(ItemEntrada it: listaItemEntrada) {
+				it.setEntrada(entrada);
+				itemEntradaRepositorio.saveAndFlush(itemEntrada);
+				
+				
+				Optional<Produto> prod=produtoRepositorio.findById(it.getProduto().getId());
+				Produto produto = prod.get();
+				produto.setEstoque(produto.getEstoque()+ it.getQuantidade());
+				produto.setPrecoVenda(it.getValor());
+				produto.setPrecoCusto(it.getValorCusto());
+				produtoRepositorio.saveAndFlush(produto);
+				
+				this.listaItemEntrada = new ArrayList<>();
+			}
+			return cadastrar(new Entrada(), new ItemEntrada());
+		}
+		return cadastrar(entrada, new ItemEntrada());
+		
 	}
 	
 	public List<ItemEntrada> getListaItemEntrada() {

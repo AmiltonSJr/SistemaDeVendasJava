@@ -32,73 +32,139 @@
 
     <div class="container mt-3">
         <form action="/salvarEntrada" th:object="${entrada}" method="POST">
-            
+        <div class="form-group">
+ 
+ 	  <!-- início dos dados da nota -->
+<div class="row">
+
             <!-- ID -->
-            <div class="mb-3">
-                <label for="id" class="form-label">ID:</label>
-                <input type="text" readonly class="form-control" id="id" th:field="*{id}">
+            <div class="col-md-2">
+                <div class="mb-3">
+                    <label for="id" class="form-label">ID:</label>
+                    <input type="text" readonly class="form-control" id="id" th:field="*{id}">
+                </div>
             </div>
 
-            <!-- OBS -->
-            <div class="mb-3">
-                <label for="nome" class="form-label">Observação:</label>
-                <input type="text" required class="form-control" id="nome" th:field="*{obs}">
+            <!-- Observação -->
+            <div class="col-md-10">
+                <div class="mb-3">
+                    <label for="nome" class="form-label">Observação:</label>
+                    <input type="text" class="form-control" id="nome" th:field="*{obs}">
+                </div>
             </div>
 
+        </div>
 
-            <!--Funcionario -->
-            <div class="mb-3">
-                <label class="form-label">Funcionário:</label>
-                <select th:field="*{funcionario}" class="form-select">
-                    <option th:each="est : ${listaFuncionarios}" th:value="${est.id}" th:text="${est.nome}"></option>
-                </select>
+        <div class="row">
+
+            <!-- Funcionário -->
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label class="form-label">Funcionário:</label>
+                    <select th:field="*{funcionario}" class="form-select">
+                        <option th:each="est : ${listaFuncionarios}"
+                                th:value="${est.id}"
+                                th:text="${est.nome}">
+                        </option>
+                    </select>
+                </div>
             </div>
-            
-            <!--Fornecedores -->
-            <div class="mb-3">
-                <label class="form-label">Fornecedores:</label>
-                <select th:field="*{fornecedor}" class="form-select">
-                    <option th:each="est : ${listaFornecedores}" th:value="${est.id}" th:text="${est.nome}"></option>
-                </select>
+
+            <!-- Fornecedor -->
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label class="form-label">Fornecedor:</label>
+                    <select th:field="*{fornecedor}" class="form-select">
+                        <option th:each="est : ${listaFornecedores}"
+                                th:value="${est.id}"
+                                th:text="${est.nome}">
+                        </option>
+                    </select>
+                </div>
             </div>
-            
-            <div class="mb-3">
-                <label class="form-label">Valor Total: </label>
-                <input type="text" readonly="readonly" required class="form-control" th:field="*{valorTotal}">
+
+        </div>
+
+        <div class="row">
+
+            <!-- Quantidade Total -->
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label class="form-label">Quantidade Total:</label>
+                    <input type="text"
+                           readonly="readonly"
+                           class="form-control"
+                           th:field="*{quantidadeTotal}">
+                </div>
             </div>
-            
-            <div class="mb-3">
-                <label class="form-label">Quantidade Total: </label>
-                <input type="text" readonly="readonly" required class="form-control" th:field="*{quantidadeTotal}">
+
+            <!-- Valor Total -->
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label class="form-label">Valor Total da Nota:</label>
+                    <input type="text"
+                           readonly="readonly"
+                           class="form-control"
+                           th:field="*{valorTotal}">
+                </div>
             </div>
+
+        </div>
+        <!-- Final dos dados do pedido -->
+  
+  		<!--Inicio Dados do Produto -->
+ <div class="row" th:object="${itemEntrada}" style="margin-top:100px;">
+    <div class="col-md-4 mb-3">
+        <label class="form-label">Produto:</label>
+        <select th:field="*{produto}" class="form-select">
+            <option th:each="est : ${listaProdutos}"
+                    th:value="${est.id}"
+                    th:text="${est.nome}">
+            </option>
+        </select>
+    </div>
+
+    <!-- Quantidade -->
+    <div class="col-md-2 mb-3">
+        <label class="form-label">Quantidade:</label>
+        <input type="text" class="form-control" th:field="*{quantidade}">
+    </div>
+
+    <!-- Valor Custo -->
+    <div class="col-md-2 mb-3">
+        <label class="form-label">Valor Unitário:</label>
+        <input type="text" class="form-control" th:field="*{valorCusto}">
+    </div>
+
+    <!-- Valor Total -->
+    <div class="col-md-2 mb-3">
+        <label class="form-label">Valor Total Produto:</label>
+        <input type="text" class="form-control" th:field="*{valor}">
+    </div>
+
+    <!-- Botão -->
+    <div class="col-md-2 mb-3 d-flex align-items-end">
+        <button type="submit"
+                name="acao"
+                th:value="itens"
+                class="btn btn-primary w-100"><i class="fa-solid fa-cart-shopping"></i>
+            Adicionar 
+        </button>
+    </div>
+
+</div>
+      <!-- final dos dados do produto -->
+
             
-            <!-- Começa itemEntrada abaixo -->
-            <div class="form-row" th:object="${itemEntrada}">
             
-           		<div class="mb-3">
-                <label class="form-label">Produto:</label>
-                <select th:field="*{produto}" class="form-select">
-                    <option th:each="est : ${listaProdutos}" th:value="${est.id}" th:text="${est.nome}"></option>
-                </select>
-                
-                <label class="form-label">Quantidade: </label>
-                <input type="text" readonly="readonly" required class="form-control" th:field="*{quantidade}">
-                
-                <label class="form-label">Valor Custo: </label>
-                <input type="text" readonly="readonly" required class="form-control" th:field="*{valorCusto}">
-                
-                <label class="form-label">Valor Total: </label>
-                <input type="text" readonly="readonly" required class="form-control" th:field="*{valor}">
-                
-          
-            	<button name="acao" th:value="itens" type="submit" class="btn btn-primary">Adicionar</button>
-            	</div>
+            
+            
   				<!-- Tabela com os itens -->
   				
   				   <table class="table table-striped table-hover" id="tabela">
            		   <thead class="table-dark">
                 		<tr>
-                   		 <th>Id</th>
+                   		 <th>ID</th>
                    		 <th>Produto</th>
                    		 <th>Quantidade</th>
                    		 <th>Valor Custo</th>
@@ -112,7 +178,7 @@
                    		 <td th:text="${itemEntrada.produto.nome}"></td>
                    		 <td th:text="${itemEntrada.quantidade}"></td>
                    		 <td th:text="${itemEntrada.valorCusto}"></td>
-                   		 <td th:text="${itemEntrada.valorVenda}"></td>
+                   		 <td th:text="${itemEntrada.valor}"></td>
                    		 <td colspan="2">
                     	    <a th:href="@{/editaritemEntrada/{id}(id=${itemEntrada.id})}" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
                     	    <a th:href="@{/removeritemEntrada/{id}(id=${itemEntrada.id})}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
@@ -126,7 +192,7 @@
 
             <!-- BOTÕES -->
             <div class="mb-3">
-                <button type="submit" class="btn btn-success">
+                <button type="submit" name="acao" th:value="salvar" class="btn btn-success">
                     <i class="fa-solid fa-floppy-disk"></i> Salvar
                 </button>
                 <a class="btn btn-dark" href="/listarEntrada">
