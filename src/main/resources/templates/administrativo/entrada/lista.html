@@ -34,29 +34,31 @@
             <thead class="table-dark">
                 <tr>
                     <th>Id</th>
-                    <th>Nome</th>
-                    <th>CEP</th>
-                    <th>Cidade</th>
+                    <th>Nome Fornecedor</th>
+                    <th>Nome Funcionario</th>
+                    <th>Data Entrada</th>
+                    <th>Valor Total</th>
                     <th>Ação</th>
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="cidade: ${listaCidade}">
-                    <td th:text="${cidade.id}"></td>
-                    <td th:text="${cidade.nome}"></td>
-                    <td th:text="${cidade.cep}"></td>
-                    <td th:text="${cidade.estado.nome}"></td>
+                <tr th:each="entrada: ${listaEntrada}">
+                    <td th:text="${entrada.id}"></td>
+                    <td th:text="${entrada.fornecedor.nome}"></td>
+                    <td th:text="${entrada.funcionario.nome}"></td>
+                    <td th:text="${entrada.dataEntrada}"></td>
+                    <td th:text="${entrada.valorTotal}"></td>
                     
                     <td>
-                        <a th:href="@{/editarCidade/{id}(id=${cidade.id})}" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
-                        <a th:href="@{/removerCidade/{id}(id=${cidade.id})}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+                        <a th:href="@{/editarEntrada/{id}(id=${entrada.id})}" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
+                        <a th:href="@{/removerEntrada/{id}(id=${entrada.id})}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
             </tbody>
         </table>
         									<!-- botões -->
         <div class="text-end mt-3">
-            <a class="btn btn-primary" href="/cadastroCidade"><i class="fa-solid fa-plus"></i> Cadastrar</a>
+            <a class="btn btn-primary" href="/cadastroEntrada"><i class="fa-solid fa-plus"></i> Cadastrar</a>
             <a class="btn btn-danger" href="/administrativo"><i class="fa-solid fa-angle-left"></i> Voltar</a>
             
         </div>
